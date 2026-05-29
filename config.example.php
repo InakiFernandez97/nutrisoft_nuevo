@@ -62,26 +62,6 @@ if (!defined('DB_PASS')) {
     define('DB_PASS', $isLocalEnvironment ? '' : 'your_password');
 }
 
-// SMTP / Mail settings (copy these into config.php with real credentials)
-if (!defined('SMTP_HOST')) {
-    define('SMTP_HOST', $isLocalEnvironment ? 'smtp.example.test' : 'smtp.example.com');
-}
-if (!defined('SMTP_PORT')) {
-    define('SMTP_PORT', $isLocalEnvironment ? 1025 : 465);
-}
-if (!defined('SMTP_USER')) {
-    define('SMTP_USER', $isLocalEnvironment ? '' : 'your_smtp_user');
-}
-if (!defined('SMTP_PASS')) {
-    define('SMTP_PASS', $isLocalEnvironment ? '' : 'your_smtp_password');
-}
-if (!defined('SMTP_FROM')) {
-    define('SMTP_FROM', $isLocalEnvironment ? 'no-reply@nutrisoft.test' : 'no-reply@yourdomain.com');
-}
-if (!defined('SMTP_FROM_NAME')) {
-    define('SMTP_FROM_NAME', $isLocalEnvironment ? 'NutriSoft Dev' : 'NutriSoft');
-}
-
 date_default_timezone_set('America/Santiago');
 
 if (function_exists('apache_setenv')) {
