@@ -36,12 +36,12 @@ class mailControlador
 		$mail->SMTPDebug = 0; // debugging: 1 = errors and messages, 2 = messages only
 		$mail->SMTPAuth = true; // authentication enabled
 		$mail->SMTPSecure = 'ssl'; // secure transfer enabled REQUIRED for Gmail
-		$mail->Host = "mail.rentalsoft.cl";
-		$mail->Port = 465; // or 587
+		$mail->Host = defined('SMTP_HOST') ? SMTP_HOST : 'localhost';
+		$mail->Port = defined('SMTP_PORT') ? SMTP_PORT : 25;
 		$mail->IsHTML(true);
-		$mail->Username = "trekrental@rentalsoft.cl";
-		$mail->Password = "VivaChile1.1";
-		$mail->SetFrom("trekrental@rentalsoft.cl", "Sistema NutriSoft");
+		$mail->Username = defined('SMTP_USER') ? SMTP_USER : '';
+		$mail->Password = defined('SMTP_PASS') ? SMTP_PASS : '';
+		$mail->SetFrom(defined('SMTP_FROM') ? SMTP_FROM : 'no-reply@example.com', defined('SMTP_FROM_NAME') ? SMTP_FROM_NAME : 'NutriSoft');
 		$mail->isHTML(true);
 		$mail->Timeout = 30;
 
