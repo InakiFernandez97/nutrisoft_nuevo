@@ -133,7 +133,7 @@ if(!defined('ROOT_PATH')) {
                 if(response.estado == 1){
 
                   Swal.fire({title: 'Perfecto tu session se esta cargando un momento...' , 
-                        text: 'Click para ingresar', 
+                        text: 'Click para ingresar xd', 
                         type: "success"}).then(function(){
                           setTimeout(' window.location.href = "Dashboard"; ',50);
                                         }
