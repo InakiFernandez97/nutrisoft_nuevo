@@ -1,0 +1,37 @@
+# Configuracion base compatible con hosting compartido (Apache/LiteSpeed)
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # Forzar HTTPS
+    RewriteCond %{HTTP_HOST} !(^localhost$|^127\.0\.0\.1$|\.test(:[0-9]+)?$) [NC]
+    RewriteCond %{HTTPS} off
+    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+    # Bloquear acceso directo a archivos sensibles
+    RewriteRule ^(config\.php|\.env)$ - [F,L,NC]
+
+    # Rutas limpias
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^([A-Za-z0-9_-]+)$ index.php?ruta=$1 [L,QSA]
+</IfModule>
+
+# Cache para estaticos
+<IfModule mod_headers.c>
+    <FilesMatch "\.(jpg|jpeg|png|gif|ico|css|js|woff|woff2|ttf|svg)$">
+        Header set Cache-Control "max-age=2592000, public"
+    </FilesMatch>
+</IfModule>
+
+# Proteger archivos ocultos (.env, .git, etc.)
+<FilesMatch "^\.">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>

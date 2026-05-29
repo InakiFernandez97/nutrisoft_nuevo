@@ -1,0 +1,14 @@
+.env
+.env.local
+config.php
+.vs/
+.idea/
+.vscode/
+error_log
+error_log.txt
+controlador/error_log
+controlador/error_log.txt
+*.log
+*.tmp
+Thumbs.db
+Desktop.ini
