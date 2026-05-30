@@ -62,11 +62,6 @@ Despliegue automático
 ---------------------
 Este proyecto se integra con el panel de hosting mediante webhook. En GitHub (Settings → Webhooks) añade la URL de payload que te entregó el panel, por ejemplo:
 
-```
-https://ferozo.host/deploy/git/4e116989183163d2b802972434298eed
-```
-
-Content type: `application/x-www-form-urlencoded`, evento: `push`.
 
 Estructura del proyecto (resumen)
 --------------------------------
@@ -101,3 +96,37 @@ Este repositorio incluye un `LICENSE` en la raíz. Lee ese archivo para condicio
 Notas finales
 ------------
 Mantén `config.php` fuera del control de versiones. Antes de hacer público el repositorio, asegúrate de que los archivos con credenciales (por ejemplo `controlador/mailControlador.php`) estén actualizados para leer las credenciales desde variables seguras.
+
+### Checklist rápido para preparar el hosting
+
+- **Crear config.php:** Copiar desde `config.example.php` y rellenar `DB_HOST`, `DB_NAME`, `DB_USER`, `DB_PASS`, `BASE_URI`. NO subir `config.php` al repositorio público.
+- **(Opcional) .env:** Si prefieres variables de entorno, copiar `.env.example` a `.env` y rellenar los valores en el servidor.
+- **Carpeta uploads:** Crear `vistas/pages/uploads/` en el hosting y dar permiso de escritura al usuario del servidor web.
+- **Importar base de datos:** Importar `nutricion.sql` en la base de datos del hosting (phpMyAdmin o CLI).
+- **Permisos recomendados:** Archivos `644`, directorios `755` o `775` para carpetas que necesiten escritura (ej. `uploads`).
+- **Mover credenciales SMTP:** No dejar usuario/clave SMTP en `controlador/mailControlador.php`; referenciar constantes de `config.php` o variables de entorno.
+- **No commitear:** No subir `.env`, `config.php`, ni logs (`error_log`, `*.log`).
+
+### Pasos concretos (panel de hosting / gestor de archivos)
+
+1. Subir el contenido del repo al directorio público del hosting.
+2. Crear `config.php` a partir de `config.example.php` y editar con las credenciales del hosting.
+3. Crear la carpeta `vistas/pages/uploads/` si no existe. 
+4. Ajustar permisos de `uploads` a escritura por el servidor web. 
+5. Importar `nutricion.sql` mediante phpMyAdmin o la herramienta de bases de datos del panel.
+
+### Pasos (si tienes SSH)
+
+```bash
+# copiar config.php (ejemplo) al servidor
+scp config.php usuario@tu-host:/ruta/a/tu/site/config.php
+
+# crear uploads y ajustar permisos
+ssh usuario@tu-host "mkdir -p /ruta/a/tu/site/vistas/pages/uploads && chown -R www-data:www-data /ruta/a/tu/site/vistas/pages/uploads && chmod 775 /ruta/a/tu/site/vistas/pages/uploads"
+
+# importar SQL via CLI
+mysql -u dbuser -p dbname < nutricion.sql
+```
+
+### Nota final
+- Asegura que `controlador/mailControlador.php` no contiene credenciales en texto plano.
