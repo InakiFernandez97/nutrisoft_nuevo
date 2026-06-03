@@ -47,12 +47,11 @@ class usuariosModelo{
     static public function insertarUsuarios($data){
 
         $con = ConexionMysql::ConectarMysql();
-        $sql="INSERT INTO usuarios ( Rut, Nombre_Usuario,Apellido_Usuario ,Correo_Usuario ,Fono_Usuario ,Privilegio_Usuario, Password_Usuario) 
-        values(:Rut,:Nombre_Usuario,:Apellido_Usuario ,:Correo_Usuario ,:Fono_Usuario ,:Privilegio_Usuario, :Password_Usuario)";
+        $sql="INSERT INTO usuarios ( Nombre_Usuario,Apellido_Usuario ,Correo_Usuario ,Fono_Usuario ,Privilegio_Usuario, Password_Usuario) 
+        values(:Nombre_Usuario,:Apellido_Usuario ,:Correo_Usuario ,:Fono_Usuario ,:Privilegio_Usuario, :Password_Usuario)";
         $sql = $con->prepare($sql);
 
        
-        $rut         = $data['rut'];
         $nombre      = $data['nombre'];
         $apellido      = $data['apellido'];
         $correo      = $data['correo'];
@@ -61,8 +60,6 @@ class usuariosModelo{
         $password      = $data['password'];
     
      
-  
-        $sql->bindParam(':Rut',$rut,PDO::PARAM_STR);
         $sql->bindParam(':Nombre_Usuario',$nombre,PDO::PARAM_STR);
         $sql->bindParam(':Apellido_Usuario',$apellido,PDO::PARAM_STR);
         $sql->bindParam(':Correo_Usuario',$correo,PDO::PARAM_STR);

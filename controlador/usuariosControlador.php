@@ -88,13 +88,13 @@ if (isset($_POST['inserta']))
   
 
 $data = array(
-"rut"        => trim( $_POST['rut']),
-"nombre"     => trim( $_POST['nombre']),
-"apellido"   => trim( $_POST['apellido']),
-"fono"       => trim( $_POST['fono']),
-"email"      => trim( $_POST['email']),
-"privilegio" => trim( $_POST['privilegio']),
-"password"   => trim( $_POST['password'])
+"rut"        => trim($_POST['rut'] ?? ''),
+"nombre"     => trim($_POST['nombre'] ?? ''),
+"apellido"   => trim($_POST['apellido'] ?? ''),
+"fono"       => trim($_POST['fono'] ?? ''),
+"correo"     => trim($_POST['correo'] ?? ''),
+"privilegio" => trim($_POST['privilegio'] ?? ''),
+"password"   => trim($_POST['password'] ?? '')
 
 );
 

@@ -214,7 +214,7 @@ $usuarios = usuariosControlador::viewUsuarios();
     var fono =    $("#fono").val();
     var password =    $("#password").val();
     var privilegio =    $("#privilegio").val();
-    var iserta = 1;
+    var inserta = 1;
   
    // var imagen = $("#imagen")[0].files[0]; 
     //alert(contrato);
@@ -237,7 +237,7 @@ $usuarios = usuariosControlador::viewUsuarios();
         datos.append('privilegio', privilegio);
         datos.append('inserta', inserta);
         $.ajax({
-            url: "<?= BASE_URI;?>controlador/usuarioControlador.php",
+            url: "<?= BASE_URI;?>controlador/usuariosControlador.php",
             method: "POST",
             data: datos,
             cache: false,
