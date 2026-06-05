@@ -452,7 +452,7 @@ class pizarraModelo{
 
         $con = ConexionMysql::ConectarMysql();
 
-        $sql = "SELECT * FROM pizarraOnce"; 
+        $sql = "SELECT * FROM pizarraonce"; 
         $query = $con->prepare($sql); 
         $query -> execute(); 
         $results = $query -> fetchAll(PDO::FETCH_OBJ);
